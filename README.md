@@ -5,6 +5,6 @@ Repository for the calculation  of a spiderweb configurarion based on "Spiderweb
 
 *In progress* <br>
 Files: <br>
-basic_functions.py - Functions necessaries to write the main system.<br>
-mass_dist_generator.py - Generator of a mass distribution. <br>
+basic_functions.py - Necessary Functions to write the main system.<br>
+mass_dist_generator.py - Generator of a mass distribution. At this moment this is not random.<br>
 parameters.py  - Parameters to be used in the program. <br>
