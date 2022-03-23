@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 #===============================================================================
 import numpy as np
-from parameters import*
 
 def generate_mass_dist(num_circles,factor ,m_0):
     mass_dist = [m_0, 1.]
