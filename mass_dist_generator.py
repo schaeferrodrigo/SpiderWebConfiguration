@@ -2,8 +2,8 @@
 #===============================================================================
 import numpy as np
 
-def generate_mass_dist(num_circles,factor ,m_0):
-    mass_dist = [m_0, 1.]
+def generate_mass_dist(num_circles,factor ,m_1):
+    mass_dist = [1, m_1]
     index = 2
 
     while index <= num_circles:
@@ -15,5 +15,5 @@ def generate_mass_dist(num_circles,factor ,m_0):
 
 
 if __name__ == '__main__':
-    mass = generate_mass_dist( num_circles, factor_mass, m_0)
+    mass = generate_mass_dist( num_circles, factor_mass, m_1)
     print(mass)
