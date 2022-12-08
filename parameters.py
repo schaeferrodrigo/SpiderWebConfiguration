@@ -6,7 +6,7 @@ from mass_dist_generator import *
 
 
 factor_mass = 0.8
-m_0  = 2.
+m_1  = 0.5
 
-inf_c, sup_c = [1,5]
-inf_l, sup_l = [1,5]
+inf_c, sup_c = [1,10]
+inf_l, sup_l = [1,10]

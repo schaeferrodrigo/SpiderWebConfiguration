@@ -38,7 +38,7 @@ def force_mi(radii, index , jndex , mass_dist , num_lines , theta):
     elif jndex == index:
         return -mass_dist[index]*xi(theta,num_lines) /((2**(3/2))*(radii[index]**2))
 
-    elif jndex >0 and jndex <1 :
+    elif jndex >0 and jndex <index :  # I changed 1 for index 
         y = radii[jndex]/radii[index]
         phi , der_phi = phi_and_derivatives(y , theta, num_lines)[0:2]
         return -mass_dist[jndex]*(phi + y*der_phi)/radii[index]**2
@@ -58,7 +58,7 @@ def vector_f(radii, mass_dist , num_lines , theta , num_circles):
     return np.array(vector)
 
 
-def der_f(radii, num_circles,num_lines, mass_dist, theta , m_0):
+def der_f(radii, num_circles,num_lines, mass_dist, theta , m_0=1):
     Jacobian_matrix = []
     for index in range(1, num_circles+1):
         row = []

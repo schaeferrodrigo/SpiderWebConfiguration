@@ -4,6 +4,10 @@ from fsolve_method import*
 from basic_functions import*
 import numpy as np
 
+
+
+
+
 def central_configuration(root, theta):
     points = np.array([[0,0]])
     for r in root:
