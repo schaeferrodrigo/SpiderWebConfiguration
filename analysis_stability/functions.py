@@ -6,6 +6,10 @@ def createDataFrame(fileData):
     dataFrame = pd.read_csv(fileData, sep= " " , header= None, names= ["Type", "Stability","NumBodies" , "NumLines" , "NumCircles"])
     return dataFrame
 
+def saveDataFrame():
+    df = createDataFrame('../data/linear_no_23')
+    df.to_csv('allConfig.csv',index=False)
+
 def unstableConfigurations( dataFrame ):
     df = dataFrame[dataFrame["Stability"] == "unstable"]
     return [df, df.shape[0]]
@@ -96,5 +100,6 @@ def generateSeparateData():
     return 0
 
 if __name__=='__main__':
-    generateSeparateData()
+    #generateSeparateData()
+    saveDataFrame()
     

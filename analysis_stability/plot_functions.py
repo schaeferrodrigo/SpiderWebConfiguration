@@ -1,7 +1,7 @@
 from functions import *
 import matplotlib.pyplot as plt
 import numpy as np
-
+import pandas as pd
 
 
 def readFile(nameFile):
@@ -28,9 +28,19 @@ def plotUnstableConfByQuantity(nameFile):
     plt.savefig("figs/percFigs/perc"+nameFile)
     plt.close()
 
-    
 
+def PlotNumLinesByNumCircles():
+    
+    df = pd.read_csv('allConfig.csv')
+    unstableDF = unstableConfigurations(df)[0]
+    unstableDF.plot('NumLines', 'NumCircles', style = '.')
+    plt.savefig('figs/frequency')
+
+
+
+    
 if __name__=='__main__':
-    plotUnstableConfByQuantity('RegisterByNumberOfLines')
-    plotUnstableConfByQuantity('RegisterByNumberOfCircles')
-    plotUnstableConfByQuantity('RegisterByNumberOfBodies')
+    #plotUnstableConfByQuantity('RegisterByNumberOfLines')
+    #plotUnstableConfByQuantity('RegisterByNumberOfCircles')
+    #plotUnstableConfByQuantity('RegisterByNumberOfBodies')
+    PlotNumLinesByNumCircles()
