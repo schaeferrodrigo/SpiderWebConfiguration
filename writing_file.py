@@ -31,4 +31,4 @@ if __name__ == '__main__':
     from parameters import *
     from fsolve_method import *
     #writing_data(num_circles,num_lines)
-    several_data(1,5,1,5)
+    #several_data(1,5,1,5)
