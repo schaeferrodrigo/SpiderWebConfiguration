@@ -26,7 +26,7 @@ def setInitialMomenta(x, masses):
     y = np.zeros((numOfBodies,2), dtype=object)
     for i in range(0, numOfBodies):
         circle = circlePosition(i,numLines)
-        print('circle = ', circle)
+        #print('circle = ', circle)
         M = matrixMasses(circle,masses)
         #print(x[i])
         y[i] = M.dot(J.dot(x[i]))
@@ -41,7 +41,7 @@ def gradU(index, numberOfBodies, x, masses):
         if jndex != index:
             mass_j = masses[circlePosition(jndex , numLines)]
             x_j = x[jndex].astype('float64')
-            print('gradU_i = ',mass_j*mass_i*(x_j - x_i)/np.linalg.norm(x_j-x_i)**3)
+            #print('gradU_i = ',mass_j*mass_i*(x_j - x_i)/np.linalg.norm(x_j-x_i)**3)
             gradU += mass_j*mass_i*(x_j - x_i)/np.linalg.norm(x_j-x_i)**3
     return gradU       
 
@@ -141,19 +141,19 @@ def testHamiltonian(listHamiltonian, nameFile , H_0):
 def IntegrationProcess(file):
     global masses
     x, masses , numOfBodies= readData(file)
-    print(x)
+    #print(x)
     
     setNumOfLines(file)
-    print('number of bodies = ', numOfBodies, 'and number of lines = ', numLines)
+    #print('number of bodies = ', numOfBodies, 'and number of lines = ', numLines)
     y = setInitialMomenta(x,masses)
     
     initialCondition = np.append(x,y,0).reshape(4*numOfBodies)
     
     H_0 = Hamiltonian(initialCondition[:2*numOfBodies], initialCondition[2*numOfBodies:], masses, numOfBodies, numLines)
-    print('initial value of Hamiltonian function = ' , H_0)
+    #print('initial value of Hamiltonian function = ' , H_0)
     listOfEnergyValues = np.array([])
-    tMax = 190
-    solution = integrate.DOP853(vectorField,0,initialCondition, t_bound = tMax, rtol = 1e-8, atol = 1e-12 , vectorized=True)
+    tMax = 300
+    solution = integrate.DOP853(vectorField,0,initialCondition, t_bound = tMax, rtol = 1e-10, atol = 1e-12 , vectorized=True)
     time  = 0
     while time < tMax:
         solution.step()
@@ -166,6 +166,7 @@ def IntegrationProcess(file):
         writeData(time, file, 'time')
         listOfEnergyValues = np.append(listOfEnergyValues , Hamiltonian(position, momentum,masses, numOfBodies,numLines))
     testHamiltonian(listOfEnergyValues, file, H_0)
+    print('integration is finished')
 
 
 
@@ -173,21 +174,29 @@ def IntegrationProcess(file):
 
 def main():
 
-    # files = os.listdir('../data/')
-
-    # for file in files:
+    files = os.listdir('../data/')
+    control = 1
+    total = len(files)
+    print('number of files = ',total)
+    for file in files:
+        print(file)
         
-    #     if file[:3] == 'num':
+        if file[:3] == 'num':
             
-    #         IntegrationProcess(file)
-    IntegrationProcess('num_lines_2_and_num_circles_1')
+            IntegrationProcess(file)
+            print('remainder = ', total- control)
+            control += 1
+        else:
+            total -=1
+            print('new total of files = ', total)
+    
 
         
 
     
 if __name__=='__main__':
 
-    setNumOfLines('num_lines_2_and_num_circles_1')
+    #setNumOfLines('num_lines_2_and_num_circles_1')
 
     # #print('number of lines = ', numLines)
     #masses = [1.0 , 0.5]
@@ -205,6 +214,6 @@ if __name__=='__main__':
     #print(readData('num_lines_2_and_num_circles_1'))
     #print(np.linalg.inv(matrixMasses(1,masses)))
     #U = gradU(0, 3, q,masses)
-    #print('U= ' , U)
+    
     
    
