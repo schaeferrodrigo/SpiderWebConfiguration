@@ -214,6 +214,6 @@ if __name__=='__main__':
     #print(readData('num_lines_2_and_num_circles_1'))
     #print(np.linalg.inv(matrixMasses(1,masses)))
     #U = gradU(0, 3, q,masses)
-    #print('U= ' , U)
+    
     
    
